@@ -1,8 +1,8 @@
 import { GameState, GameStateType } from "../state/game"
 import { Character } from "../state/character"
-import { useKeyPress } from "./use-key-press"
 import { homeMap, startPos } from "../maps/home"
 import { Wolf } from "../state/wolf"
+import { gameKeys } from "../input/keys"
 
 let _game
 function getGame() {
@@ -28,20 +28,7 @@ function getGame() {
 export function useGame(): GameStateType {
   const game = getGame()
 
-  // wasd
-  useKeyPress("w", () => game.character.tryMove(0, -1))
-  useKeyPress("s", () => game.character.tryMove(0, 1))
-  useKeyPress("a", () => game.character.tryMove(-1, 0))
-  useKeyPress("d", () => game.character.tryMove(1, 0))
-
-  // diagonal
-  useKeyPress("q", () => game.character.tryMove(-1, -1))
-  useKeyPress("e", () => game.character.tryMove(1, -1))
-  useKeyPress("c", () => game.character.tryMove(1, 1))
-  useKeyPress("z", () => game.character.tryMove(-1, 1))
-
-  // rest
-  useKeyPress("x", () => game.character.rest())
+  gameKeys(game)
 
   return game
 }

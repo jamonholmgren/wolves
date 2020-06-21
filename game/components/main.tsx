@@ -11,7 +11,7 @@ export const Main = observer(function Main() {
   const game = useGame()
 
   const offsetLeft = game.character.x * -32 + 768 / 2
-  const offsetTop = game.character.y * -32 + 768 / 2
+  const offsetTop = game.character.y * -32 + 340
 
   function opacityFor(x, y) {
     const dist = game.character.distanceTo({ x, y })
@@ -21,27 +21,37 @@ export const Main = observer(function Main() {
   return (
     <main>
       <h1>Wolves RPG</h1>
-      <div id="map" key="map">
-        {game.area.map.map((row: MapRow, y: number) => (
-          <div className="map-row" data-row={y} key={`map-row-${y}`}>
-            {row.map((tile: Tile, x: number) => (
-              <div
-                className={`map-tile tile-${tile}`}
-                key={`map-tile-${x}-${y}`}
-                style={{ opacity: opacityFor(x, y) }}
-              >
-                {game.character.at(x, y) ? (
-                  <Character character={game.character} key="character" />
-                ) : null}
-                {game.wolves.map((wolf: WolfType, i: number) =>
-                  wolf.at(x, y) ? <Wolf wolf={wolf} key={i} /> : null
-                )}
-              </div>
-            ))}
-          </div>
-        ))}
+      <pre id="instructions">
+        {`
+        Keys
+        
+        Q W E
+        A S D   Move in direction (S is "rest")
+        Z X C
+        `}
+      </pre>
+      <div id="play-area">
+        <div id="map" key="map">
+          {game.area.map.map((row: MapRow, y: number) => (
+            <div className="map-row" data-row={y} key={`map-row-${y}`}>
+              {row.map((tile: Tile, x: number) => (
+                <div
+                  className={`map-tile tile-${tile}`}
+                  key={`map-tile-${x}-${y}`}
+                  style={{ opacity: opacityFor(x, y) }}
+                >
+                  {game.character.at(x, y) ? (
+                    <Character character={game.character} key="character" />
+                  ) : null}
+                  {game.wolves.map((wolf: WolfType, i: number) =>
+                    wolf.at(x, y) ? <Wolf wolf={wolf} key={i} /> : null
+                  )}
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
-
       <style jsx>{`
         main {
         }
@@ -49,6 +59,13 @@ export const Main = observer(function Main() {
           font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
             "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
             "Helvetica Neue", sans-serif;
+        }
+        #play-area {
+          width: 100%;
+          height: 700px;
+          overflow: hidden;
+          background-color: #343434;
+          position: relative;
         }
         #map {
           margin: 0 auto;
