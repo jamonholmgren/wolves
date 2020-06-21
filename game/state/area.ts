@@ -1,7 +1,5 @@
 import { types, Instance, SnapshotIn, SnapshotOut } from "mobx-state-tree"
-import { homeMap } from "../maps/home"
-
-import { Tile } from "../types"
+import { passable, Tile } from "../types"
 
 export const Area = types
   .model("Area", {
@@ -10,7 +8,12 @@ export const Area = types
   .views((area) => ({
     // The tile at x/y coords
     at(x: number, y: number): Tile | undefined {
-      return area.map[x][y]
+      return area.map[x] && area.map[x][y]
+    },
+    // Can pass here?
+    pass(x: number, y: number): boolean {
+      const tile = this.at(x, y)
+      return !!tile && passable.includes(tile)
     },
   }))
 

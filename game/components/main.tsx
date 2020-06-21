@@ -60,7 +60,11 @@ export const Main = observer(function Main() {
           background-color: #56aa44;
         }
         .tile-tree {
-          background-color: #338833;
+          background-color: #56aa44;
+          background-image: url("/assets/rpg-nature-sheet.png");
+          background-position: -32px -32px;
+          width: 32px;
+          height: 32px;
         }
       `}</style>
     </main>

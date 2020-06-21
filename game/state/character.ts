@@ -1,4 +1,11 @@
-import { types, Instance, SnapshotIn, SnapshotOut } from "mobx-state-tree"
+import {
+  types,
+  Instance,
+  SnapshotIn,
+  SnapshotOut,
+  getParent,
+} from "mobx-state-tree"
+import { GameStateType } from "./game"
 
 export const Character = types
   .model("Character", {
@@ -8,9 +15,17 @@ export const Character = types
   })
   .actions((character) => ({
     move(x: number, y: number) {
-      character.x += x
-      character.y += y
-      console.log(character.x, character.y)
+      const game: GameStateType = getParent(character)
+
+      const newX = character.x + x
+      const newY = character.y + y
+
+      // You shall not pass
+      if (!game.area.pass(newX, newY)) return
+
+      // Okay, you can pass
+      character.x = newX
+      character.y = newY
     },
   }))
   .views((character) => ({
