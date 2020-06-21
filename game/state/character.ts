@@ -1,7 +1,7 @@
 import { Instance, SnapshotIn, SnapshotOut, getRoot } from "mobx-state-tree"
 import { NPC } from "./npc"
 import { GameStateType } from "./game"
-import { Tile } from "../types"
+import { Tile, g, d } from "../types"
 
 export const Character = NPC.named("Character")
   .actions((char) => ({
@@ -16,7 +16,7 @@ export const Character = NPC.named("Character")
   }))
   .views((char) => ({
     passable(): Tile[] {
-      return ["ground", "door"]
+      return [g, d]
     },
   }))
 

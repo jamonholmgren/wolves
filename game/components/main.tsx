@@ -36,7 +36,7 @@ export const Main = observer(function Main() {
             <div className="map-row" data-row={y} key={`map-row-${y}`}>
               {row.map((tile: Tile, x: number) => (
                 <div
-                  className={`map-tile tile-${tile}`}
+                  className={`map-tile tile-${tile || "ground"}`}
                   key={`map-tile-${x}-${y}`}
                   style={{ opacity: opacityFor(x, y) }}
                 >

@@ -6,7 +6,7 @@ import {
   getRoot,
 } from "mobx-state-tree"
 import { GameStateType } from "./game"
-import { Tile } from "../types"
+import { Tile, g } from "../types"
 
 export const NPC = types
   .model({
@@ -32,7 +32,7 @@ export const NPC = types
       return (deltaX === 1 && deltaY === 0) || (deltaX === 0 && deltaY === 1)
     },
     passable(): Tile[] {
-      return ["ground"]
+      return [g]
     },
   }))
   .actions((npc) => ({

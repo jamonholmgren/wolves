@@ -3,7 +3,6 @@ import { useState, useEffect } from "react"
 export function useKeyPress(targetKey: string, handler: () => void) {
   function downHandler({ key }) {
     if (key === targetKey) {
-      console.log(key)
       handler()
     }
   }

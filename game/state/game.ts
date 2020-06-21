@@ -11,7 +11,6 @@ export const GameState = types
   })
   .actions((game) => ({
     npcMove() {
-      console.log("moving")
       game.wolves.forEach((wolf) => wolf.aiMove())
     },
   }))
