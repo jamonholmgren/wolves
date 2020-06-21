@@ -25,7 +25,7 @@ export const Main = observer(function Main() {
         {`
         Keys
         
-        Q W E
+        Q W E                                         O sound on/off
         A S D   Move in direction (S is "rest")
         Z X C
         `}

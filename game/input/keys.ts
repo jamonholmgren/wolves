@@ -16,4 +16,7 @@ export function gameKeys(game: GameStateType) {
 
   // rest
   useKeyPress("s", () => game.character.rest())
+
+  // sound on/off
+  useKeyPress("o", () => game.soundToggle())
 }

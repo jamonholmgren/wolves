@@ -8,10 +8,26 @@ export const GameState = types
     character: Character,
     area: Area,
     wolves: types.array(Wolf),
+    sound: true,
   })
   .actions((game) => ({
     npcMove() {
       game.wolves.forEach((wolf) => wolf.aiMove())
+    },
+    soundToggle() {
+      game.sound = !game.sound
+    },
+    wolfHowl() {
+      if (!game.sound) return
+
+      const howls = [
+        `/assets/wolf2.mp3`,
+        `/assets/wolf6.mp3`,
+        `/assets/wolf7.mp3`,
+      ]
+
+      const audio = new Audio(howls[Math.floor(Math.random() * 3)])
+      audio.play()
     },
   }))
 

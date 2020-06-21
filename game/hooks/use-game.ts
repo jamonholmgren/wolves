@@ -22,6 +22,9 @@ function getGame() {
       Wolf.create({ x: 5, y: 17, hp: 100, status: "hostile" }),
     ],
   })
+
+  if (process.browser) _game.wolfHowl()
+
   return _game
 }
 
