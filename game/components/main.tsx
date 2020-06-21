@@ -1,9 +1,9 @@
 import { observer } from "mobx-react-lite"
 
-import { homeMap } from "../maps/home"
 import { useGame } from "../hooks/use-game"
 
 import Character from "./character"
+import { Tile, MapRow } from "../types"
 
 export const Main = observer(function Main() {
   const game = useGame()
@@ -12,9 +12,9 @@ export const Main = observer(function Main() {
     <main>
       <h1>Wolves RPG</h1>
       <div id="wolves" key="wolves">
-        {homeMap.map((row, y) => (
+        {game.area.map.map((row: MapRow, y: number) => (
           <div className="map-row" data-row={y} key={`map-row-${y}`}>
-            {row.map((tile, x) => (
+            {row.map((tile: Tile, x: number) => (
               <div
                 className={`map-tile tile-${tile}`}
                 key={`map-tile-${x}-${y}`}

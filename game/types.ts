@@ -3,4 +3,4 @@ export const t = "tree"
 
 export type Tile = typeof g | typeof t
 export type MapRow = Tile[]
-export type Map = MapRow[]
+export type AreaMap = MapRow[]

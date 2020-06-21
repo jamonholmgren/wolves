@@ -1,6 +1,7 @@
 import { GameState } from "../state/game"
 import { Character } from "../state/character"
 import { useKeyPress } from "./use-key-press"
+import { homeMap } from "../maps/home"
 
 let _game
 const getGame = () => {
@@ -12,6 +13,7 @@ const getGame = () => {
       y: 10,
       name: "Hans",
     }),
+    area: { map: homeMap },
   })
   return _game
 }
