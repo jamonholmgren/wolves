@@ -4,6 +4,8 @@ import { useGame } from "../hooks/use-game"
 
 import Character from "./character"
 import { Tile, MapRow } from "../types"
+import Wolf from "./wolf"
+import { WolfType } from "../state/wolf"
 
 export const Main = observer(function Main() {
   const game = useGame()
@@ -24,6 +26,9 @@ export const Main = observer(function Main() {
                 {game.character.at(x, y) ? (
                   <Character character={game.character} key="character" />
                 ) : null}
+                {game.wolves.map((wolf: WolfType, i: number) =>
+                  wolf.at(x, y) ? <Wolf wolf={wolf} key={i} /> : null
+                )}
               </div>
             ))}
           </div>
