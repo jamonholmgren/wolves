@@ -3,9 +3,10 @@ import {
   Instance,
   SnapshotIn,
   SnapshotOut,
-  getParent,
+  getRoot,
 } from "mobx-state-tree"
 import { GameStateType } from "./game"
+import { Tile } from "../types"
 
 export const NPC = types
   .model({
@@ -30,30 +31,35 @@ export const NPC = types
 
       return (deltaX === 1 && deltaY === 0) || (deltaX === 0 && deltaY === 1)
     },
+    passable(): Tile[] {
+      return ["ground"]
+    },
   }))
   .actions((npc) => ({
     move(x: number, y: number) {
-      const game: GameStateType = getParent(npc)
+      const game: GameStateType = getRoot(npc)
 
       // Let's check where we're trying to move
       const newX = npc.x + x
       const newY = npc.y + y
 
       // You shall not pass
-      if (!game.area.pass(newX, newY)) return
+      if (!npc.passable().includes(game.area.at(newX, newY))) return false
 
       // Okay, you can pass
       npc.x = newX
       npc.y = newY
+
+      return true
     },
     moveToward({ x, y }) {
-      if (npc.x < x) {
+      if (x < npc.x) {
         this.move(-1, 0)
-      } else if (npc.x > x) {
+      } else if (x > npc.x) {
         this.move(1, 0)
-      } else if (npc.y < y) {
+      } else if (y < npc.y) {
         this.move(0, -1)
-      } else if (npc.y > y) this.move(0, 1)
+      } else if (y > npc.y) this.move(0, 1)
     },
   }))
 

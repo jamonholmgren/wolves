@@ -1,9 +1,9 @@
 import {
   types,
-  getParent,
   Instance,
   SnapshotIn,
   SnapshotOut,
+  getRoot,
 } from "mobx-state-tree"
 import { NPC } from "./npc"
 import { GameStateType } from "./game"
@@ -11,8 +11,20 @@ import { GameStateType } from "./game"
 export const Wolf = NPC.props({
   status: types.enumeration(["neutral", "hostile", "friendly"]),
 }).actions((wolf) => ({
-  do() {
-    const game: GameStateType = getParent(wolf)
+  moveRandom() {
+    const rand = Math.random()
+    if (rand < 0.1) {
+      wolf.move(-1, 0)
+    } else if (rand < 0.2) {
+      wolf.move(1, 0)
+    } else if (rand < 0.3) {
+      wolf.move(0, -1)
+    } else if (rand < 0.4) {
+      wolf.move(0, 1)
+    }
+  },
+  aiMove() {
+    const game: GameStateType = getRoot(wolf)
 
     // the wolf will now do something based on its aggression level
     if (wolf.status === "hostile") {
@@ -22,18 +34,10 @@ export const Wolf = NPC.props({
         // if it can see the player?
         wolf.moveToward(game.character)
       } else {
-        // move randomly sometimes
-        const rand = Math.random()
-        if (rand < 0.1) {
-          wolf.move(-1, 0)
-        } else if (rand < 0.2) {
-          wolf.move(1, 0)
-        } else if (rand < 0.3) {
-          wolf.move(0, -1)
-        } else if (rand < 0.4) {
-          wolf.move(0, 1)
-        }
+        this.moveRandom()
       }
+    } else {
+      this.moveRandom()
     }
   },
 }))

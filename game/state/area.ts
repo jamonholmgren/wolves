@@ -17,6 +17,6 @@ export const Area = types
     },
   }))
 
-export interface AreaType extends Instance<typeof Area> {} // => { title: string; setTitle: (v: string) => void }
-export interface AreaSnapshotIn extends SnapshotIn<typeof Area> {} // => { title?: string }
-export interface AreaSnapshotOut extends SnapshotOut<typeof Area> {} // => { title: string }
+export interface AreaType extends Instance<typeof Area> {}
+export interface AreaSnapshotIn extends SnapshotIn<typeof Area> {}
+export interface AreaSnapshotOut extends SnapshotOut<typeof Area> {}

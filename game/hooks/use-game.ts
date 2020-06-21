@@ -28,10 +28,10 @@ const getGame = () => {
 export const useGame = () => {
   const game = getGame()
 
-  useKeyPress("w", () => game.character.move(0, -1))
-  useKeyPress("s", () => game.character.move(0, 1))
-  useKeyPress("a", () => game.character.move(-1, 0))
-  useKeyPress("d", () => game.character.move(1, 0))
+  useKeyPress("w", () => game.character.tryMove(0, -1))
+  useKeyPress("s", () => game.character.tryMove(0, 1))
+  useKeyPress("a", () => game.character.tryMove(-1, 0))
+  useKeyPress("d", () => game.character.tryMove(1, 0))
 
   return game
 }
