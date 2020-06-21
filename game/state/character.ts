@@ -11,7 +11,6 @@ export const Character = types
   .model("Character", {
     x: types.number,
     y: types.number,
-    name: types.string,
   })
   .actions((character) => ({
     move(x: number, y: number) {

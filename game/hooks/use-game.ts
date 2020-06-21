@@ -1,7 +1,7 @@
 import { GameState } from "../state/game"
 import { Character } from "../state/character"
 import { useKeyPress } from "./use-key-press"
-import { homeMap } from "../maps/home"
+import { homeMap, startPos } from "../maps/home"
 
 let _game
 const getGame = () => {
@@ -9,9 +9,8 @@ const getGame = () => {
 
   _game = GameState.create({
     character: Character.create({
-      x: 4,
-      y: 4,
-      name: "Hans",
+      x: startPos[0],
+      y: startPos[1],
     }),
     area: { map: homeMap },
   })

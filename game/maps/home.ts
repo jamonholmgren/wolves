@@ -1,5 +1,7 @@
 import { AreaMap, g, t, w, d } from "../types"
 
+export const startPos = [4, 4]
+
 // prettier-ignore
 export const homeMap: AreaMap = [
   [ t, t, t, t, t, t, t, t, t, t, t, t, t, t, t, t, t, t, t, t, t, t, t, t],
