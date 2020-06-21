@@ -10,18 +10,25 @@ import { WolfType } from "../state/wolf"
 export const Main = observer(function Main() {
   const game = useGame()
 
+  const offsetLeft = game.character.x * -32 + 768 / 2
+  const offsetTop = game.character.y * -32 + 768 / 2
+
+  function opacityFor(x, y) {
+    const dist = game.character.distanceTo({ x, y })
+    return Math.max((7 - dist) / 4, 0)
+  }
+
   return (
     <main>
       <h1>Wolves RPG</h1>
-      <div id="wolves" key="wolves">
+      <div id="map" key="map">
         {game.area.map.map((row: MapRow, y: number) => (
           <div className="map-row" data-row={y} key={`map-row-${y}`}>
             {row.map((tile: Tile, x: number) => (
               <div
                 className={`map-tile tile-${tile}`}
                 key={`map-tile-${x}-${y}`}
-                data-column={x}
-                data-coordinates={[x, y]}
+                style={{ opacity: opacityFor(x, y) }}
               >
                 {game.character.at(x, y) ? (
                   <Character character={game.character} key="character" />
@@ -43,13 +50,15 @@ export const Main = observer(function Main() {
             "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
             "Helvetica Neue", sans-serif;
         }
-        #wolves {
+        #map {
           margin: 0 auto;
           width: 768px;
           height: 768px;
           padding: 10px;
           background-color: #343434;
           position: relative;
+          left: ${offsetLeft}px;
+          top: ${offsetTop}px;
         }
         .map-row {
           width: 100%;

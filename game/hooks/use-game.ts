@@ -1,11 +1,11 @@
-import { GameState } from "../state/game"
+import { GameState, GameStateType } from "../state/game"
 import { Character } from "../state/character"
 import { useKeyPress } from "./use-key-press"
 import { homeMap, startPos } from "../maps/home"
 import { Wolf } from "../state/wolf"
 
 let _game
-const getGame = () => {
+function getGame() {
   if (_game) return _game
 
   _game = GameState.create({
@@ -25,7 +25,7 @@ const getGame = () => {
   return _game
 }
 
-export const useGame = () => {
+export function useGame(): GameStateType {
   const game = getGame()
 
   useKeyPress("w", () => game.character.tryMove(0, -1))

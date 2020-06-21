@@ -37,14 +37,15 @@ export const NPC = types
   }))
   .actions((npc) => ({
     move(x: number, y: number) {
-      const game: GameStateType = getRoot(npc)
+      const game = getRoot(npc) as GameStateType
 
       // Let's check where we're trying to move
       const newX = npc.x + x
       const newY = npc.y + y
 
       // You shall not pass
-      if (!npc.passable().includes(game.area.at(newX, newY))) return false
+      const tileAtNewSpot = game.area.at(newX, newY)
+      if (npc.passable().includes(tileAtNewSpot) === false) return false
 
       // Okay, you can pass
       npc.x = newX

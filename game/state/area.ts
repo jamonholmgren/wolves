@@ -1,5 +1,5 @@
 import { types, Instance, SnapshotIn, SnapshotOut } from "mobx-state-tree"
-import { passable, Tile } from "../types"
+import { Tile } from "../types"
 
 export const Area = types
   .model("Area", {
@@ -9,11 +9,6 @@ export const Area = types
     // The tile at x/y coords
     at(x: number, y: number): Tile | undefined {
       return area.map[y] && area.map[y][x]
-    },
-    // Can pass here?
-    pass(x: number, y: number): boolean {
-      const tile = this.at(x, y)
-      return !!tile && passable.includes(tile)
     },
   }))
 
