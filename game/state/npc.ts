@@ -53,14 +53,25 @@ export const NPC = types
 
       return true
     },
+    rest() {
+      // no-op
+    },
+    moveRandom() {
+      const randX = Math.floor(Math.random() * 3) - 1
+      const randY = Math.floor(Math.random() * 3) - 1
+      this.move(randX, randY)
+    },
     moveToward({ x, y }) {
-      if (x < npc.x) {
-        this.move(-1, 0)
-      } else if (x > npc.x) {
-        this.move(1, 0)
-      } else if (y < npc.y) {
-        this.move(0, -1)
-      } else if (y > npc.y) this.move(0, 1)
+      const dirX = Math.sign(x - npc.x)
+      const dirY = Math.sign(y - npc.y)
+
+      this.move(dirX, dirY)
+    },
+    moveAway({ x, y }) {
+      const dirX = Math.sign(x - npc.x)
+      const dirY = Math.sign(y - npc.y)
+
+      this.move(-dirX, -dirY)
     },
   }))
 
