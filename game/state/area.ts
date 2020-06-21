@@ -8,7 +8,7 @@ export const Area = types
   .views((area) => ({
     // The tile at x/y coords
     at(x: number, y: number): Tile | undefined {
-      return area.map[x] && area.map[x][y]
+      return area.map[y] && area.map[y][x]
     },
     // Can pass here?
     pass(x: number, y: number): boolean {

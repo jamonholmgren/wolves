@@ -9,8 +9,8 @@ const getGame = () => {
 
   _game = GameState.create({
     character: Character.create({
-      x: 10,
-      y: 10,
+      x: 4,
+      y: 4,
       name: "Hans",
     }),
     area: { map: homeMap },

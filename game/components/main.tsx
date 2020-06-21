@@ -55,16 +55,22 @@ export const Main = observer(function Main() {
           width: 32px;
           height: 32px;
           float: left;
+          background-image: url("/assets/rpg-nature-sheet.png");
+          background-color: #56aa44;
         }
         .tile-ground {
-          background-color: #56aa44;
+          background-image: none;
         }
         .tile-tree {
-          background-color: #56aa44;
-          background-image: url("/assets/rpg-nature-sheet.png");
           background-position: -32px -32px;
-          width: 32px;
-          height: 32px;
+        }
+        .tile-wall {
+          background-image: url("/assets/rpg-sheet.png");
+          background-position: -544px 0px;
+        }
+        .tile-door {
+          background-image: url("/assets/rpg-sheet.png");
+          background-position: -608px -64px;
         }
       `}</style>
     </main>
